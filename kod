@@ -1,0 +1,55 @@
+#include <Servo.h>
+
+Servo servo1, servo2, servo3, servo4, servo5, servo6, servo7, servo8, servo9;
+int potPin1 = A0;
+int potPin2 = A1;
+int potPin3 = A2;
+
+int servoMin = 0;  // Servo minimum açı değeri
+int servoMax = 180;  // Servo maksimum açı değeri
+
+void setup() {
+  servo1.attach(2);  // İlk 3 servo motorun bağlı olduğu pinler
+  servo2.attach(3);
+  servo3.attach(4);
+
+  servo4.attach(5);  // İkinci 3 servo motorun bağlı olduğu pinler
+  servo5.attach(6);
+  servo6.attach(7);
+
+  servo7.attach(8);  // Üçüncü 3 servo motorun bağlı olduğu pinler
+  servo8.attach(9);
+  servo9.attach(10);
+}
+
+void loop() {
+  int potValue1 = analogRead(potPin1);  // İlk potansiyometre değeri
+  int potValue2 = analogRead(potPin2);  // İkinci potansiyometre değeri
+  int potValue3 = analogRead(potPin3);  // Üçüncü potansiyometre değeri
+
+  // İlk 3 servo motoru kontrol etmek için
+  if (potValue1 > 0 && potValue1 < 341) {
+    int servoAngle = map(potValue1, 0, 341, servoMin, servoMax);
+    servo1.write(servoAngle);
+    servo2.write(servoAngle);
+    servo3.write(servoAngle);
+  }
+
+  // İkinci 3 servo motoru kontrol etmek için
+  if (potValue2 > 0 && potValue2 < 341) {
+    int servoAngle = map(potValue2, 0, 341, servoMin, servoMax);
+    servo4.write(servoAngle);
+    servo5.write(servoAngle);
+    servo6.write(servoAngle);
+  }
+
+  // Üçüncü 3 servo motoru kontrol etmek için
+  if (potValue3 > 0 && potValue3 < 341) {
+    int servoAngle = map(potValue3, 0, 341, servoMin, servoMax);
+    servo7.write(servoAngle);
+    servo8.write(servoAngle);
+    servo9.write(servoAngle);
+  }
+
+  delay(15);  // Gecikme süresi
+}
